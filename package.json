@@ -1,6 +1,6 @@
 {
   "name": "openclaw-plugin-translation",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Plugin OpenClaw: terjemah teks via API LibreTranslate-compat",
   "type": "module",
   "main": "index.ts",
@@ -15,7 +15,7 @@
     "node": ">=22.14.0"
   },
   "dependencies": {
-    "@orbit-0g/sdk": "^0.1.9",
+    "@orbit-0g/sdk": "^0.1.10",
     "@sinclair/typebox": "0.34.48"
   },
   "devDependencies": {
