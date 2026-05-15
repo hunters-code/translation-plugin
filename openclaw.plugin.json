@@ -5,6 +5,10 @@
   "activation": {
     "onStartup": true
   },
+  "orbit": {
+    "billing": true,
+    "pluginId": "PLACEHOLDER_REPLACE_WITH_REGISTERED_PLUGIN_ID"
+  },
   "configSchema": {
     "type": "object",
     "additionalProperties": false,

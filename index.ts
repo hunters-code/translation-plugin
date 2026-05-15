@@ -1,5 +1,6 @@
 import { Type, type Static } from "@sinclair/typebox";
 import { definePluginEntry, jsonResult } from "openclaw/plugin-sdk/core";
+import { registerOrbitUserBilling } from "@orbit-0g/sdk";
 import { detect, languages, translate } from "./src/client";
 
 const apiBaseUrl = (process.env.OPENCLAW_TRANSLATION_API_URL ?? "https://libretranslate.com").trim();
@@ -43,6 +44,10 @@ export default definePluginEntry({
   description:
     "Menerjemahkan teks dan mendeteksi bahasa lewat API LibreTranslate-compat (atur OPENCLAW_TRANSLATION_API_URL untuk server sendiri)",
   register(api) {
+    registerOrbitUserBilling(api as any, {
+      pluginId: process.env.ORBIT_PLUGIN_ID,
+    });
+
     api.registerTool({
       name: "translation_translate",
       label: "Terjemahkan teks",
