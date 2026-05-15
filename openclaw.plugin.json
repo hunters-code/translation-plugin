@@ -9,6 +9,9 @@
     "billing": true,
     "pluginId": "PLACEHOLDER_REPLACE_WITH_REGISTERED_PLUGIN_ID"
   },
+  "contracts": {
+    "tools": ["translation_translate", "translation_detect", "translation_languages"]
+  },
   "configSchema": {
     "type": "object",
     "additionalProperties": false,
