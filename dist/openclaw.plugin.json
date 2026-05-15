@@ -1,0 +1,22 @@
+{
+  "id": "openclaw-translation",
+  "name": "Terjemahan teks",
+  "description": "Menerjemahkan dan mendeteksi bahasa memakai endpoint LibreTranslate-compat (self-hosted atau publik)",
+  "activation": {
+    "onStartup": true
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "apiBaseUrl": {
+        "type": "string",
+        "description": "Basis URL API (runtime: env OPENCLAW_TRANSLATION_API_URL)"
+      },
+      "apiKey": {
+        "type": "string",
+        "description": "Kunci API opsional (runtime: env OPENCLAW_TRANSLATION_API_KEY)"
+      }
+    }
+  }
+}

@@ -1,15 +1,21 @@
 {
   "name": "openclaw-plugin-translation",
-  "version": "0.1.0",
+  "version": "0.1.6",
   "description": "Plugin OpenClaw: terjemah teks via API LibreTranslate-compat",
   "type": "module",
   "main": "index.ts",
-  "keywords": ["openclaw", "plugin", "translation", "libretranslate"],
+  "keywords": [
+    "openclaw",
+    "plugin",
+    "translation",
+    "libretranslate"
+  ],
   "license": "MIT",
   "engines": {
     "node": ">=22.14.0"
   },
   "dependencies": {
+    "@orbit-0g/sdk": "^0.1.11",
     "@sinclair/typebox": "0.34.48"
   },
   "devDependencies": {
@@ -21,10 +27,13 @@
     "openclaw": ">=2026.2.0"
   },
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "publish": "orbit-publish"
   },
   "openclaw": {
-    "extensions": ["./index.ts"],
+    "extensions": [
+      "./index.ts"
+    ],
     "compat": {
       "pluginApi": ">=2026.3.24-beta.2",
       "minGatewayVersion": "2026.3.24-beta.2"

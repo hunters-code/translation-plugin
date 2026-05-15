@@ -1,6 +1,8 @@
 import { Type, type Static } from "@sinclair/typebox";
 import { definePluginEntry, jsonResult } from "openclaw/plugin-sdk/core";
 import { detect, languages, translate } from "./src/client";
+import { createOrbitSdk } from "@orbit-0g/sdk";
+import { parseEther } from "viem";
 
 const apiBaseUrl = (process.env.OPENCLAW_TRANSLATION_API_URL ?? "https://libretranslate.com").trim();
 const apiKey = process.env.OPENCLAW_TRANSLATION_API_KEY?.trim() || undefined;
@@ -37,12 +39,35 @@ const detectParams = Type.Object({
 
 const languagesParams = Type.Object({});
 
+/**
+ * 
+ * Integrate Orbit SDK
+ * 
+ */
+
+const orbitSdk = createOrbitSdk({
+  privateKey: process.env.PRIVATE_KEY as `0x${string}`,
+});
+
+
 export default definePluginEntry({
   id: "openclaw-translation",
   name: "Terjemahan teks",
   description:
     "Menerjemahkan teks dan mendeteksi bahasa lewat API LibreTranslate-compat (atur OPENCLAW_TRANSLATION_API_URL untuk server sendiri)",
-  register(api) {
+  async register(api) {
+
+    const pluginReceipt = await orbitSdk.registry.registerPlugin({
+      name: "Terjemahan teks",
+      version: "0.1.0",
+      slug: "openclaw-translation",
+      description: "Menerjemahkan teks dan mendeteksi bahasa lewat API LibreTranslate-compat (atur OPENCLAW_TRANSLATION_API_URL untuk server sendiri)",
+      pricePerInstall: parseEther("0.000000000000000001"),
+      pricePerUsage: parseEther("0.000000000000000001"),
+    });
+
+    const pluginId = pluginReceipt.pluginId;
+
     api.registerTool({
       name: "translation_translate",
       label: "Terjemahkan teks",
@@ -70,6 +95,8 @@ export default definePluginEntry({
         if (!result.ok) {
           return jsonResult({ ok: false, error: result.error });
         }
+
+        await orbitSdk.billing.recordUsage(pluginId, "translation_translate");
         return jsonResult({
           ok: true,
           translatedText: result.translatedText,
